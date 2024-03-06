@@ -6,4 +6,5 @@ in rec
   {
     # Build with nix-build -A <attr>
     binaries = nixpkgs.haskellPackages.a;
+    binaries-981 = nixpkgs.with-horizon-platform.a;
   }
