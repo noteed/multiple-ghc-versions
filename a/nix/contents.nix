@@ -6,12 +6,12 @@ let
 
 in { nixpkgs ? defNixpkgs }:
 
-let inherit (nixpkgs.lib.attrsets) getAttrFromPath;
-in {
-  # Lists all packages made available through this nix project.
-  # The format is `{ <pkgName> : <pkgDir> }` (we refer to this as pInfo).
-  # The used directory should be the path of the directory relative to the root
-  # of the project.
+let
+  inherit (nixpkgs.lib.attrsets) getAttrFromPath mapAttrs;
+
+  # Lists all packages made available through this project. The format is `{
+  # <pkgName> : <pkgDir> }` (we refer to this as pInfo). The used directory
+  # should be the path of the directory relative to the root of the project.
   pkgList = {
     a = nix-filter {
       root = ../.;
@@ -22,7 +22,17 @@ in {
       ];
     };
   };
+in {
+  inherit pkgList;
 
   # Get an attribute from a string path from a larger attrSet
   getPkg = pkgs: pPath: getAttrFromPath [pPath] pkgs;
+
+  # The overriding function that can provide our package to e.g. an overlay.
+  ourOverrides = selfh: superh:
+    let
+      callCabalOn = name: dir:
+        selfh.callCabal2nix "${name}" dir { };
+
+    in mapAttrs callCabalOn pkgList;
 }
