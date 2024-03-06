@@ -2,5 +2,9 @@ module B
   ( run
   ) where
 
+import A qualified
+
 run :: IO ()
-run = putStrLn "B.run"
+run = do
+  A.run
+  putStrLn "B.run"

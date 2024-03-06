@@ -1,4 +1,8 @@
 {
+    "a": {
+        "path": "../../a",
+        "type": "local"
+    },
     "niv": {
         "branch": "master",
         "description": "Easy dependency management for Nix projects",

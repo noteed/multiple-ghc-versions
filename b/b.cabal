@@ -21,6 +21,7 @@ library
   import: common-extensions, common-options, common-dependencies
   hs-source-dirs: src
   build-depends:
+    a
   exposed-modules:
     B
 
