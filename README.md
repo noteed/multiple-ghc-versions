@@ -18,7 +18,7 @@ Commence), the `overlays.nix` from the dependencies are explicitely imported in
 a single list in `overlays.nix`.
 
 I think that in the case of horizon-haskell, I should expose the overriding
-function (usually called `ourOverrides` in `contents.nix` (instead of in
+function (usually called `overrides` in `contents.nix` (instead of in
 `overlay.nix`), so that I can use that instead of `overlays.nix`.
 
 To check that this works as intended, I create two projects in this directory,

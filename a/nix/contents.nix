@@ -29,7 +29,7 @@ in {
   getPkg = pkgs: pPath: getAttrFromPath [pPath] pkgs;
 
   # The overriding function that can provide our package to e.g. an overlay.
-  ourOverrides = selfh: superh:
+  overrides = selfh: superh:
     let
       callCabalOn = name: dir:
         selfh.callCabal2nix "${name}" dir { };

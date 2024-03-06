@@ -11,8 +11,8 @@ let
 in {
   haskellPackages = super.haskellPackages.override (old: {
     overrides =
-      lib.composeExtensions (old.overrides or (_: _: { })) contents.ourOverrides;
+      lib.composeExtensions (old.overrides or (_: _: { })) contents.overrides;
     });
 
-  with-horizon-platform = horizon-platform.extend(contents.ourOverrides);
+  with-horizon-platform = horizon-platform.extend(contents.overrides);
 }
