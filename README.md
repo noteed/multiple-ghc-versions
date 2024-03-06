@@ -23,3 +23,7 @@ function (usually called `ourOverrides` in `contents.nix` (instead of in
 
 To check that this works as intended, I create two projects in this directory,
 A and B, using the existing approach, then I'll modify them as described above.
+
+So it works. With the previous overlay approach, all the dependencies overlays
+are listed in `overlays.nix`. For horizon-platform, all the overriding
+functions are listed in `overlay.nix` instead.
