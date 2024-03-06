@@ -1,0 +1,32 @@
+cabal-version:      2.2
+name:               b
+version:            0.1.0.0
+synopsis:           B package
+
+common common-extensions
+  default-language: Haskell2010
+  default-extensions:
+    ImportQualifiedPost
+
+common common-options
+  ghc-options:
+    -Wall
+    -Wmissing-export-lists
+
+common common-dependencies
+  build-depends:
+      base >=4.7 && <5
+
+library
+  import: common-extensions, common-options, common-dependencies
+  hs-source-dirs: src
+  build-depends:
+  exposed-modules:
+    B
+
+executable b
+  import: common-extensions, common-options, common-dependencies
+  main-is: b.hs
+  hs-source-dirs: bin
+  build-depends:
+      b
