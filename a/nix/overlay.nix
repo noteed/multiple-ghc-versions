@@ -1,3 +1,7 @@
+{
+  compiler ? "ghc928"
+}:
+
 self: super:
 let
 
@@ -9,7 +13,7 @@ let
   horizon-platform = (builtins.getFlake "https://gitlab.horizon-haskell.net/package-sets/horizon-platform/-/archive/6af53faa48b5039696008086fb4dfa4ec823d428/horizon-platform-6af53faa48b5039696008086fb4dfa4ec823d428.tar.gz").outputs.legacyPackages.x86_64-linux;
 
 in {
-  haskellPackages = super.haskellPackages.override (old: {
+  haskellPackages = super.haskell.packages."${compiler}".override (old: {
     overrides =
       lib.composeExtensions (old.overrides or (_: _: { })) contents.overrides;
     });

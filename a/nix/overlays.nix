@@ -3,6 +3,10 @@
 # 2. Provide this particular package with a fixed point of overlayed packages,
 #    if they become needed.
 
+{
+  compiler ? "ghc928"
+}:
+
 let
 
   sources = import ./sources.nix;
@@ -14,4 +18,4 @@ let
     []
     ;
 
-in haskellOverlays ++ [ (import ./overlay.nix) ]
+in haskellOverlays ++ [ (import ./overlay.nix { inherit compiler; }) ]

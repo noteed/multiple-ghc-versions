@@ -1,4 +1,5 @@
 
+# Trying horizon-haskell.
 
 I want to try to use horizon-haskell to provide different GHC versions and
 related packages. It is using flakes, but it is possible to use
@@ -27,3 +28,17 @@ A and B, using the existing approach, then I'll modify them as described above.
 So it works. With the previous overlay approach, all the dependencies overlays
 are listed in `overlays.nix`. For horizon-platform, all the overriding
 functions are listed in `overlay.nix` instead.
+
+# Multiple GHC versions
+
+Independently from horizon-haskell, this shows how to build project A with a
+different GHC version than the default one (the default is ghc928):
+
+```
+$ cd a
+$ nix-build -A binaries --no-out-link --argstr compiler ghc942
+$ nix-build -A binaries --no-out-link --argstr compiler ghc962
+```
+
+Building with ghc962 doesn't work. (I think template-haskell 2.20 is selected,
+but language-haskell-extract need `<2.16`.)
