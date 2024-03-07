@@ -31,14 +31,20 @@ functions are listed in `overlay.nix` instead.
 
 # Multiple GHC versions
 
-Independently from horizon-haskell, this shows how to build project A with a
-different GHC version than the default one (the default is ghc928):
+Independently from horizon-haskell, this shows how to build project A and B
+with a different GHC version than the default one (the default is ghc928):
 
 ```
-$ cd a
+$ cd a  # or b
 $ nix-build -A binaries --no-out-link --argstr compiler ghc942
 $ nix-build -A binaries --no-out-link --argstr compiler ghc962
 ```
 
 Building with ghc962 doesn't work. (I think template-haskell 2.20 is selected,
 but language-haskell-extract need `<2.16`.)
+
+Note: with this change (the `compiler` argument), in `overlay.nix`, we no
+longer define `haskellPackages` in term of `haskellPackages`, but in term of
+`haskell.packages."${compiler}"`, and we have to pass all the "overrides",
+instead of being able to build on top of `old.overrides` with only our current
+`contents.overrides`.

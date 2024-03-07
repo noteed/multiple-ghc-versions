@@ -1,3 +1,7 @@
+{
+  compiler ? "ghc928"
+}:
+
 self: super:
 let
 
@@ -17,10 +21,9 @@ let
   ];
 
 in {
-  haskellPackages = super.haskellPackages.override (old: {
-    overrides =
-      lib.composeExtensions (old.overrides or (_: _: { })) contents.overrides;
-  });
+  haskellPackages = super.haskell.packages."${compiler}".extend (
+    lib.foldl' (lhs: rhs: lib.composeExtensions lhs rhs) (_: _: {}) overrides
+  );
 
   with-horizon-platform = horizon-platform.extend (
     lib.foldl' (lhs: rhs: lib.composeExtensions lhs rhs) (_: _: {}) overrides

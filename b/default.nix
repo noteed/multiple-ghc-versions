@@ -1,6 +1,11 @@
+{
+  compiler ? "ghc928"
+  # 9.2.8 is the one corresponding to haskellPackages when not overlayed.
+}:
+
 let
   sources = import ./nix/sources.nix;
-  overlays = import ./nix/overlays.nix;
+  overlays = import ./nix/overlays.nix { inherit compiler; };
   nixpkgs = import sources.nixpkgs { inherit overlays; };
 in rec
   {

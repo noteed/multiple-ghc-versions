@@ -3,6 +3,10 @@
 # 2. Provide this particular package with a fixed point of overlayed packages,
 #    if they become needed.
 
+{
+  compiler ? "ghc928"
+}:
+
 let
 
   sources = import ./sources.nix;
@@ -10,7 +14,7 @@ let
 
   # Normally, we use the second definition of getOverlays, but since we're
   # using a local path to our A project, we have to construct a local path.
-  getOverlays = pkg : import (../. + "${pkg}/nix/overlays.nix") {};
+  getOverlays = pkg : import (../. + "${pkg}/nix/overlays.nix") { inherit compiler; };
   # getOverlays = pkg : import "${pkg}/nix/overlays.nix";
 
   # We can overlay Haskell packages here.
@@ -18,4 +22,4 @@ let
     getOverlays a
     ;
 
-in haskellOverlays ++ [ (import ./overlay.nix) ]
+in haskellOverlays ++ [ (import ./overlay.nix { inherit compiler; }) ]
