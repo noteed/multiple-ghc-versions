@@ -52,6 +52,25 @@ longer define `haskellPackages` in term of `haskellPackages`, but in term of
 instead of being able to build on top of `old.overrides` with only our current
 `contents.overrides`.
 
+# Multiple Nixpkgs versions
+
+Similarly to having multiple GHC versions, it might be useful to be able to
+build a package against multiple Nixpkgs versions.
+
+To do that, we introduce a `pkgssrc` argument to the `default.nix` file, that
+must be provided by `sources.json`. Such an alternative Nixpkgs can be added
+for instance with:
+
+```
+$ niv add NixOS/nixpkgs -n nixos-23.10 -b nixos-23.11
+```
+
+Given multiple Nixpkgs in `sources.json`, we can select the one we want with:
+
+```
+$ nix-build -A binaries --no-out-link --argstr pkgssrc nixos-23.11
+```
+
 # Resources
 
 This repository uses Nix and Haskell without flakes, and has multiple GHC
