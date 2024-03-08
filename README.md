@@ -48,3 +48,17 @@ longer define `haskellPackages` in term of `haskellPackages`, but in term of
 `haskell.packages."${compiler}"`, and we have to pass all the "overrides",
 instead of being able to build on top of `old.overrides` with only our current
 `contents.overrides`.
+
+# Resources
+
+This repository uses Nix and Haskell without flakes, and has multiple GHC
+versions: https://github.com/awakesecurity/proto3-suite.
+
+I've seen repository that don't use Nix use this kind of things:
+https://github.com/haskell-actions/. Servant is one example.
+
+# TODO
+
+I'm wondering how, if necessary, I should work on
+https://github.com/jhickner/smtp-mail or  https://github.com/tibbe/template.
+They were repositories that are not present in horizon-platform.
