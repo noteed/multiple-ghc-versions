@@ -71,6 +71,11 @@ Given multiple Nixpkgs in `sources.json`, we can select the one we want with:
 $ nix-build -A binaries --no-out-link --argstr pkgssrc nixos-23.11
 ```
 
+# Combinations
+
+The different versions of both GHC and Nixpkgs can be combined. To list and
+build easily those combinations, a `release.nix` file is provided.
+
 # Resources
 
 This repository uses Nix and Haskell without flakes, and has multiple GHC
