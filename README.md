@@ -1,3 +1,6 @@
+# Experimenting with multiple GHC versions under Nix
+
+Note: having a look at the Git history from this repository may help.
 
 # Trying horizon-haskell.
 
